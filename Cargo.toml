@@ -1,0 +1,20 @@
+[package]
+name = "ternary-fleet-packing"
+version = "0.1.0"
+edition = "2021"
+description = "Packing and encoding algorithms for ternary representations in neural network models"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/SuperInstance/ternary-fleet-packing"
+
+[dependencies]
+ternary-types = { git = "https://github.com/SuperInstance/ternary-types.git" }
+ternary-matmul = { git = "https://github.com/SuperInstance/ternary-matmul.git", optional = true }
+ternary-quantize = { git = "https://github.com/SuperInstance/ternary-quantize.git", optional = true }
+
+[features]
+default = ["matmul-ops"]
+matmul-ops = ["ternary-matmul"]
+quantize = ["ternary-quantize"]
+
+[badges]
+maintenance = { status = "experimental" }
