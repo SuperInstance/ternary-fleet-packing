@@ -406,7 +406,11 @@ mod tests {
 
     #[test]
     fn test_trit_optimal_large() {
-        let vals: Vec<i8> = (0..1000).map(|i| (i as i8) % 3 - 1).collect();
+        // Use i32 to avoid overflow for i > 127
+        let vals: Vec<i8> = (0..1000).map(|i| {
+            let v = (i as i32) % 3 - 1;
+            v as i8
+        }).collect();
         let mut buf = vec![0u8; (vals.len() + 4) / 5];
         let n = trit_optimal_pack(&vals, &mut buf).unwrap();
         let out: Vec<i8> = trit_optimal_unpack::<1000>(&buf[..n]).to_vec();
